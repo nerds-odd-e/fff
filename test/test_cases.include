@@ -261,11 +261,12 @@ TEST_F(FFFTestSuite, custom_fake_sequence_not_exausthed)
 
 TEST_F(FFFTestSuite, can_set_out_param)
 {
-    char out_arg_val = 'x';
-    voidfunc1outparam_fake.out_arg0_val = &out_arg_val;
-    char a = 'a';
+    char out_val = 'x';
+    voidfunc1outparam_fake.out_arg0_val = &out_val;
 
+    char a = 'a';
     voidfunc1outparam(&a);
+
     ASSERT_EQ('x', a);
 }
 
