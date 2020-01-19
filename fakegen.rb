@@ -50,6 +50,7 @@ def output_internal_helper_macros
   define_declare_all_func_common_helper
   define_declare_return_value_history
   define_save_arg_helper
+  define_save_out_arg_helper
   define_room_for_more_history
   define_save_ret_history_helper
   define_save_arg_history_helper
@@ -106,6 +107,7 @@ def define_declare_out_arg_helper
   putd_backslash "#define DECLARE_OUT_ARG(type, n)"
   indent {
     putd_backslash "type out_arg##n##_val;"
+    putd "type out_arg##n##_val_initial;"
   }
 end
 
@@ -132,6 +134,17 @@ def define_save_arg_helper
   putd_backslash "#define SAVE_ARG(FUNCNAME, n)"
   indent {
     putd "memcpy((void*)&FUNCNAME##_fake.arg##n##_val, (void*)&arg##n, sizeof(arg##n));"
+  }
+end
+
+def define_save_out_arg_helper
+  puts
+  putd_backslash "#define SAVE_OUT_ARG(FUNCNAME, n)"
+  indent {
+    putd_backslash "if (memcmp(&FUNCNAME##_fake.out_arg##n##_val, &FUNCNAME##_fake.out_arg##n##_val_initial, sizeof(arg##n)))"
+    indent {
+      putd "memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_val, sizeof(arg##n));"
+    }
   }
 end
 
@@ -406,6 +419,7 @@ end
 
 def output_function_body(arg_count, has_varargs, is_value_function)
   arg_count.times { |i| putd_backslash "SAVE_ARG(FUNCNAME, #{i});" }
+  arg_count.times { |i| putd_backslash "SAVE_OUT_ARG(FUNCNAME, #{i});" }
   putd_backslash "if(ROOM_FOR_MORE_HISTORY(FUNCNAME)){"
   indent {
     arg_count.times { |i| putd_backslash "SAVE_ARG_HISTORY(FUNCNAME, #{i});" }
