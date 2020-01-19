@@ -263,10 +263,10 @@ TEST_F(FFFTestSuite, custom_fake_sequence_not_exausthed)
 TEST_F(FFFTestSuite, can_set_out_param)
 {
     unsigned int anInt = MEANING_OF_LIFE;
-    voidfunc2outparam_fake.out_arg0_val = &anInt;
+    voidfunc2outparam_fake.out_arg0_ptr = &anInt;
 
     unsigned int outInt = 12306;
-    char * outStr = "another String";
+    const char * outStr = "any String";
     voidfunc2outparam(&outInt, outStr);
 
     ASSERT_EQ(MEANING_OF_LIFE, outInt);
