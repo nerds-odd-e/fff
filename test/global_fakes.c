@@ -5,6 +5,7 @@
 DEFINE_FAKE_VOID_FUNC(voidfunc1, int);
 DEFINE_FAKE_VOID_FUNC(voidfunc2, char, char);
 DEFINE_FAKE_VOID_FUNC(voidfunc1outparam, char *);
+DEFINE_FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, const char *);
 
 DEFINE_FAKE_VALUE_FUNC(long, longfunc0);
 DEFINE_FAKE_VALUE_FUNC(enum MYBOOL, enumfunc0);

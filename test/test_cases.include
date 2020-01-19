@@ -259,15 +259,17 @@ TEST_F(FFFTestSuite, custom_fake_sequence_not_exausthed)
   ASSERT_EQ('z', a);
 }
 
+#define MEANING_OF_LIFE 42
 TEST_F(FFFTestSuite, can_set_out_param)
 {
-    char out_val = 'x';
-    voidfunc1outparam_fake.out_arg0_val = &out_val;
+    unsigned int anInt = MEANING_OF_LIFE;
+    voidfunc2outparam_fake.out_arg0_val = &anInt;
 
-    char a = 'a';
-    voidfunc1outparam(&a);
+    unsigned int outInt = 12306;
+    char * outStr = "another String";
+    voidfunc2outparam(&outInt, outStr);
 
-    ASSERT_EQ('x', a);
+    ASSERT_EQ(MEANING_OF_LIFE, outInt);
 }
 
 TEST_F(FFFTestSuite, return_value_sequence_saved_in_history)
@@ -353,7 +355,6 @@ TEST_F(FFFTestSuite, custom_fake_sequence_exhausted)
   ASSERT_EQ('z', a);
 }
 //DECLARE_FAKE_VALUE_FUNC0(long, longfunc0);
-#define MEANING_OF_LIFE 42
 long my_custom_value_fake(void)
 {
     return MEANING_OF_LIFE;
@@ -410,7 +411,7 @@ int valuefunc3var_custom_fake3(const char *str, int a, va_list vl)
 
 TEST_F(FFFTestSuite, vararg_custom_fake_sequence_not_exhausted)
 {
-	int (*custom_fakes[])(const char *, int, va_list) = {valuefunc3var_custom_fake1, 
+	int (*custom_fakes[])(const char *, int, va_list) = {valuefunc3var_custom_fake1,
                                                          valuefunc3var_custom_fake2,
 	                                                     valuefunc3var_custom_fake3};
 	SET_CUSTOM_FAKE_SEQ(valuefunc3var, custom_fakes, 3);
