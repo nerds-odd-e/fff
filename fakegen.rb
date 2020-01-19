@@ -107,7 +107,8 @@ def define_declare_out_arg_helper
   putd_backslash "#define DECLARE_OUT_ARG(type, n)"
   indent {
     putd_backslash "type out_arg##n##_ptr;"
-    putd "type out_arg##n##_ptr_initial;"
+    putd_backslash "type out_arg##n##_ptr_initial;"
+    putd "size_t out_arg##n##_size;"
   }
 end
 
@@ -143,7 +144,14 @@ def define_save_out_arg_helper
   indent {
     putd_backslash "if (memcmp(&FUNCNAME##_fake.out_arg##n##_ptr, &FUNCNAME##_fake.out_arg##n##_ptr_initial, sizeof(arg##n)))"
     indent {
-      putd "memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, sizeof(arg##n));"
+      putd_backslash "if (FUNCNAME##_fake.out_arg##n##_size)"
+      indent {
+        putd_backslash "memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, FUNCNAME##_fake.out_arg##n##_size);"
+      }
+      putd_backslash "else"
+      indent {
+        putd "memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, sizeof(arg##n));"
+      }
     }
   }
 end

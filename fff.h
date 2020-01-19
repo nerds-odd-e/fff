@@ -59,7 +59,8 @@ SOFTWARE.
 
 #define DECLARE_OUT_ARG(type, n) \
     type out_arg##n##_ptr; \
-    type out_arg##n##_ptr_initial;
+    type out_arg##n##_ptr_initial; \
+    size_t out_arg##n##_size;
 
 #define DECLARE_ALL_FUNC_COMMON \
     unsigned int call_count; \
@@ -74,7 +75,10 @@ SOFTWARE.
 
 #define SAVE_OUT_ARG(FUNCNAME, n) \
     if (memcmp(&FUNCNAME##_fake.out_arg##n##_ptr, &FUNCNAME##_fake.out_arg##n##_ptr_initial, sizeof(arg##n))) \
-        memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, sizeof(arg##n));
+        if (FUNCNAME##_fake.out_arg##n##_size) \
+            memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, FUNCNAME##_fake.out_arg##n##_size); \
+        else \
+            memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, sizeof(arg##n));
 
 #define ROOM_FOR_MORE_HISTORY(FUNCNAME) \
     FUNCNAME##_fake.call_count < FFF_ARG_HISTORY_LEN
