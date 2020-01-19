@@ -259,6 +259,16 @@ TEST_F(FFFTestSuite, custom_fake_sequence_not_exausthed)
   ASSERT_EQ('z', a);
 }
 
+TEST_F(FFFTestSuite, can_set_out_param)
+{
+    char out_arg_val = 'x';
+    voidfunc1outparam_fake.out_arg0_val = &out_arg_val;
+    char a = 'a';
+
+    voidfunc1outparam(&a);
+    ASSERT_EQ('x', a);
+}
+
 TEST_F(FFFTestSuite, return_value_sequence_saved_in_history)
 {
     long myReturnVals[3] = { 3, 7, 9 };

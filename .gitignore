@@ -2,6 +2,7 @@ build/
 *~
 *.sublime-project
 *.sublime-workspace
+.idea
 
 # User-specific files
 *.rsuser

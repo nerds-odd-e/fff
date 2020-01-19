@@ -46,6 +46,7 @@ def output_internal_helper_macros
   define_custom_fake_sequence_helper
   define_reset_fake_macro
   define_declare_arg_helper
+  define_declare_out_arg_helper
   define_declare_all_func_common_helper
   define_declare_return_value_history
   define_save_arg_helper
@@ -97,6 +98,14 @@ def define_declare_arg_helper
   indent {
     putd_backslash "type arg##n##_val;"
     putd "type arg##n##_history[FFF_ARG_HISTORY_LEN];"
+  }
+end
+
+def define_declare_out_arg_helper
+  puts
+  putd_backslash "#define DECLARE_OUT_ARG(type, n)"
+  indent {
+    putd_backslash "type out_arg##n##_val;"
   }
 end
 
@@ -334,6 +343,7 @@ def output_variables(arg_count, has_varargs, has_calling_conventions, is_value_f
   in_struct{
     arg_count.times { |argN|
       putd_backslash "DECLARE_ARG(ARG#{argN}_TYPE, #{argN}, FUNCNAME)"
+      putd_backslash "DECLARE_OUT_ARG(ARG#{argN}_TYPE, #{argN})"
     }
     putd_backslash "DECLARE_ALL_FUNC_COMMON"
     putd_backslash "DECLARE_VALUE_FUNCTION_VARIABLES(RETURN_TYPE)" unless not is_value_function
