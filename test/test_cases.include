@@ -286,6 +286,22 @@ TEST_F(FFFTestSuite, can_set_out_param_with_size)
     ASSERT_TRUE(!memcmp("a String", outStr, sizeof(aStr)));
 }
 
+TEST_F(FFFTestSuite, can_set_out_param_uint8)
+{
+    uint8_t anUint8 = MEANING_OF_LIFE;
+    voidfunc3outparam_fake.out_arg0_ptr = &anUint8;
+//    uint32_t anUint32 = MEANING_OF_LIFE;
+//    voidfunc3outparam_fake.out_arg1_ptr = &anUint32;
+//    voidfunc3outparam_fake.out_arg1_size = sizeof(anUint32);
+
+    uint8_t outUint8 = 12306;
+    uint32_t outUint32 = 12307;
+    voidfunc3outparam(&outUint8, &outUint32);
+
+    ASSERT_EQ(MEANING_OF_LIFE, outUint8);
+//    ASSERT_EQ(MEANING_OF_LIFE, outUint32);
+}
+
 TEST_F(FFFTestSuite, return_value_sequence_saved_in_history)
 {
     long myReturnVals[3] = { 3, 7, 9 };

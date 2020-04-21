@@ -14,6 +14,7 @@
 
 #include "../fff.h"
 #include <gtest/gtest.h>
+#include <stdint.h>
 
 DEFINE_FFF_GLOBALS
 
@@ -22,6 +23,7 @@ FAKE_VOID_FUNC(voidfunc1, int);
 FAKE_VOID_FUNC(voidfunc2, char, char);
 FAKE_VOID_FUNC(voidfunc1outparam, char *);
 FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, const char *);
+FAKE_VOID_FUNC(voidfunc3outparam, uint8_t *, uint32_t *);
 FAKE_VALUE_FUNC(long, longfunc0);
 FAKE_VOID_FUNC_VARARG(voidfunc3var, const char *, int, ...);
 FAKE_VALUE_FUNC_VARARG(int, valuefunc3var, const char *, int, ...);

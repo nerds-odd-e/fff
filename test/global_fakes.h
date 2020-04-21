@@ -3,6 +3,7 @@
 
 #include "../fff.h"
 #include "string.h"
+#include <stdint.h>
 
 
 ////  Imaginary production code header file ///
@@ -20,6 +21,7 @@ DECLARE_FAKE_VOID_FUNC(voidfunc1, int);
 DECLARE_FAKE_VOID_FUNC(voidfunc2, char, char);
 DECLARE_FAKE_VOID_FUNC(voidfunc1outparam, char *);
 DECLARE_FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, const char *);
+DECLARE_FAKE_VOID_FUNC(voidfunc3outparam, uint8_t *, uint32_t *);
 DECLARE_FAKE_VALUE_FUNC(long, longfunc0);
 DECLARE_FAKE_VALUE_FUNC(enum MYBOOL, enumfunc0);
 DECLARE_FAKE_VALUE_FUNC(struct MyStruct, structfunc0);
