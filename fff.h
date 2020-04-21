@@ -74,11 +74,11 @@ SOFTWARE.
     memcpy((void*)&FUNCNAME##_fake.arg##n##_val, (void*)&arg##n, sizeof(arg##n));
 
 #define SAVE_OUT_ARG_Y(FUNCNAME, n) \
-    if (memcmp(&FUNCNAME##_fake.out_arg##n##_ptr, &FUNCNAME##_fake.out_arg##n##_ptr_initial, sizeof(arg##n))) \
+    if (FUNCNAME##_fake.out_arg##n##_ptr) \
         if (FUNCNAME##_fake.out_arg##n##_size) \
             memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, FUNCNAME##_fake.out_arg##n##_size); \
         else \
-            memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, sizeof(arg##n));
+            *arg##n = *FUNCNAME##_fake.out_arg##n##_ptr;
 
 #define SAVE_OUT_ARG_OUT_ARG_0(FUNCNAME, n)
 #define SAVE_OUT_ARG_OUT_ARG_1(FUNCNAME, n)

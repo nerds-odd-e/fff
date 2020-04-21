@@ -142,7 +142,7 @@ def define_save_out_arg_helper
   puts
   putd_backslash "#define SAVE_OUT_ARG_Y(FUNCNAME, n)"
   indent {
-    putd_backslash "if (memcmp(&FUNCNAME##_fake.out_arg##n##_ptr, &FUNCNAME##_fake.out_arg##n##_ptr_initial, sizeof(arg##n)))"
+    putd_backslash "if (FUNCNAME##_fake.out_arg##n##_ptr)"
     indent {
       putd_backslash "if (FUNCNAME##_fake.out_arg##n##_size)"
       indent {
@@ -150,7 +150,7 @@ def define_save_out_arg_helper
       }
       putd_backslash "else"
       indent {
-        putd "memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, sizeof(arg##n));"
+        putd "*arg##n = *FUNCNAME##_fake.out_arg##n##_ptr;"
       }
     }
   }

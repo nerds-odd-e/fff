@@ -34,7 +34,7 @@ FAKE_VOID_FUNC(voidfunc1outparam, char *);
 
 #define OUT_ARG_0 Y
 #define OUT_ARG_1 Y
-FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, const char *);
+FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, char *);
 #undef OUT_ARG_0
 #undef OUT_ARG_1
 

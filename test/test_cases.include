@@ -267,7 +267,7 @@ TEST_F(FFFTestSuite, can_set_out_param)
     voidfunc2outparam_fake.out_arg0_ptr = &anInt;
 
     unsigned int outInt = 12306;
-    const char * outStr = "any String";
+    char * outStr = "any String";
     voidfunc2outparam(&outInt, outStr);
 
     ASSERT_EQ(MEANING_OF_LIFE, outInt);
@@ -275,7 +275,7 @@ TEST_F(FFFTestSuite, can_set_out_param)
 
 TEST_F(FFFTestSuite, can_set_out_param_with_size)
 {
-    const char aStr[] = "a String";
+    char aStr[] = "a String";
     voidfunc2outparam_fake.out_arg1_ptr = aStr;
     voidfunc2outparam_fake.out_arg1_size = sizeof(aStr);
 
