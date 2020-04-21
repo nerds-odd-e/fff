@@ -16,6 +16,10 @@
 #include <gtest/gtest.h>
 #include <stdint.h>
 
+struct MyStruct {
+    int x;
+    int y;
+};
 DEFINE_FFF_GLOBALS
 
 #ifndef TEST_WITH_CALLING_CONVENTIONS
@@ -24,6 +28,7 @@ FAKE_VOID_FUNC(voidfunc2, char, char);
 FAKE_VOID_FUNC(voidfunc1outparam, char *);
 FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, const char *);
 FAKE_VOID_FUNC(voidfunc3outparam, uint8_t *, uint32_t *);
+FAKE_VOID_FUNC(voidfunc4outparam, struct MyStruct *);
 FAKE_VALUE_FUNC(long, longfunc0);
 FAKE_VOID_FUNC_VARARG(voidfunc3var, const char *, int, ...);
 FAKE_VALUE_FUNC_VARARG(int, valuefunc3var, const char *, int, ...);

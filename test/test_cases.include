@@ -302,6 +302,22 @@ TEST_F(FFFTestSuite, can_set_out_param_uint8)
 //    ASSERT_EQ(MEANING_OF_LIFE, outUint32);
 }
 
+TEST_F(FFFTestSuite, can_set_out_param_struct)
+{
+    struct MyStruct anStruct;
+    anStruct.x = 101;
+    anStruct.y = 202;
+    voidfunc4outparam_fake.out_arg0_ptr = &anStruct;
+
+    struct MyStruct outStruct;
+    outStruct.x = 303;
+    outStruct.y = 404;
+    voidfunc4outparam(&outStruct);
+
+    ASSERT_EQ(101, outStruct.x);
+    ASSERT_EQ(202, outStruct.y);
+}
+
 TEST_F(FFFTestSuite, return_value_sequence_saved_in_history)
 {
     long myReturnVals[3] = { 3, 7, 9 };

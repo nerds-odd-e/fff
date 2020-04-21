@@ -27,6 +27,7 @@ FAKE_VOID_FUNC(voidfunc2, char, char);
 FAKE_VOID_FUNC(voidfunc1outparam, char *);
 FAKE_VOID_FUNC(voidfunc2outparam, unsigned int *, const char *);
 FAKE_VOID_FUNC(voidfunc3outparam, uint8_t *, uint32_t *);
+FAKE_VOID_FUNC(voidfunc4outparam, struct MyStruct *);
 FAKE_VALUE_FUNC(long, longfunc0);
 FAKE_VALUE_FUNC(enum MYBOOL, enumfunc0);
 FAKE_VALUE_FUNC(struct MyStruct, structfunc0);
