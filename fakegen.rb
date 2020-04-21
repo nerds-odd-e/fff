@@ -140,7 +140,7 @@ end
 
 def define_save_out_arg_helper
   puts
-  putd_backslash "#define SAVE_OUT_ARG(FUNCNAME, n)"
+  putd_backslash "#define SAVE_OUT_ARG_Y(FUNCNAME, n)"
   indent {
     putd_backslash "if (memcmp(&FUNCNAME##_fake.out_arg##n##_ptr, &FUNCNAME##_fake.out_arg##n##_ptr_initial, sizeof(arg##n)))"
     indent {
@@ -154,6 +154,28 @@ def define_save_out_arg_helper
       }
     }
   }
+  puts
+  $MAX_ARGS.times do |i|
+    putd "#define SAVE_OUT_ARG_OUT_ARG_#{i}(FUNCNAME, n)"
+  end
+  puts
+  putd_backslash "#define SAVE_OUT_ARG_INNER(FUNCNAME, n, flag)"
+  indent do
+    putd "SAVE_OUT_ARG_##flag(FUNCNAME, n)"
+  end
+  puts
+  putd_backslash "#define SAVE_OUT_ARG(FUNCNAME, n, flag)"
+  indent do
+    putd "SAVE_OUT_ARG_INNER(FUNCNAME, n, flag)"
+  end
+  puts
+  putd_backslash "#define SAVE_OUT_ARGS()"
+  indent do
+    ($MAX_ARGS - 1).times do |i|
+      putd_backslash "SAVE_OUT_ARG(FUNCNAME, #{i}, OUT_ARG_#{i})"
+    end
+    putd "SAVE_OUT_ARG(FUNCNAME, #{$MAX_ARGS}, OUT_ARG_#{$MAX_ARGS})"
+  end
 end
 
 def define_save_ret_history_helper
@@ -427,7 +449,7 @@ end
 
 def output_function_body(arg_count, has_varargs, is_value_function)
   arg_count.times { |i| putd_backslash "SAVE_ARG(FUNCNAME, #{i});" }
-  arg_count.times { |i| putd_backslash "SAVE_OUT_ARG(FUNCNAME, #{i});" }
+  arg_count.times { |i| putd_backslash "SAVE_OUT_ARG(FUNCNAME, #{i}, OUT_ARG_#{i});" }
   putd_backslash "if(ROOM_FOR_MORE_HISTORY(FUNCNAME)){"
   indent {
     arg_count.times { |i| putd_backslash "SAVE_ARG_HISTORY(FUNCNAME, #{i});" }
