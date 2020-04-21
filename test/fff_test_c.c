@@ -19,6 +19,8 @@ enum MYBOOL { FALSE = 899, TRUE };
 struct MyStruct {
     int x;
     int y;
+    uint32_t anUint32;
+    char * anString;
 };
 
 #ifndef TEST_WITH_CALLING_CONVENTIONS

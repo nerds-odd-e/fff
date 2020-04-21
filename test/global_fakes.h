@@ -11,6 +11,8 @@ enum MYBOOL { FALSE = 899, TRUE };
 struct MyStruct {
     int x;
     int y;
+    uint32_t anUint32;
+    char * anString;
 };
 enum MYBOOL enumfunc();
 struct MyStruct structfunc();

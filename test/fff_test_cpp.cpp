@@ -19,6 +19,8 @@
 struct MyStruct {
     int x;
     int y;
+    uint32_t anUint32;
+    char * anString;
 };
 DEFINE_FFF_GLOBALS
 
