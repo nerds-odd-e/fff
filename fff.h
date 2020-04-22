@@ -74,12 +74,11 @@ SOFTWARE.
     memcpy((void*)&FUNCNAME##_fake.arg##n##_val, (void*)&arg##n, sizeof(arg##n));
 
 #define SAVE_OUT_ARG_Y(FUNCNAME, n) \
-    if (FUNCNAME##_fake.out_arg##n##_ptr) \
-        if (FUNCNAME##_fake.out_arg##n##_size) \
-            for(int i=0; i<FUNCNAME##_fake.out_arg##n##_size; i++) \
-                arg##n[i] = FUNCNAME##_fake.out_arg##n##_ptr[i]; \
-        else \
-            *arg##n = *FUNCNAME##_fake.out_arg##n##_ptr;
+    if (FUNCNAME##_fake.out_arg##n##_ptr) { \
+        FUNCNAME##_fake.out_arg##n##_size = FUNCNAME##_fake.out_arg##n##_size ? FUNCNAME##_fake.out_arg##n##_size : 1; \
+        for(int i=0; i<FUNCNAME##_fake.out_arg##n##_size; i++) \
+            arg##n[i] = FUNCNAME##_fake.out_arg##n##_ptr[i]; \
+    }
 
 #define SAVE_OUT_ARG_OUT_ARG_0(FUNCNAME, n)
 #define SAVE_OUT_ARG_OUT_ARG_1(FUNCNAME, n)

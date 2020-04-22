@@ -142,20 +142,15 @@ def define_save_out_arg_helper
   puts
   putd_backslash "#define SAVE_OUT_ARG_Y(FUNCNAME, n)"
   indent {
-    putd_backslash "if (FUNCNAME##_fake.out_arg##n##_ptr)"
+    putd_backslash "if (FUNCNAME##_fake.out_arg##n##_ptr) {"
     indent {
-      putd_backslash "if (FUNCNAME##_fake.out_arg##n##_size)"
+      putd_backslash "FUNCNAME##_fake.out_arg##n##_size = FUNCNAME##_fake.out_arg##n##_size ? FUNCNAME##_fake.out_arg##n##_size : 1;"
+      putd_backslash "for(int i=0; i<FUNCNAME##_fake.out_arg##n##_size; i++)"
       indent {
-        putd_backslash "for(int i=0; i<FUNCNAME##_fake.out_arg##n##_size; i++)"
-        indent {
-          putd_backslash "arg##n[i] = FUNCNAME##_fake.out_arg##n##_ptr[i];"
-        }
-      }
-      putd_backslash "else"
-      indent {
-        putd "*arg##n = *FUNCNAME##_fake.out_arg##n##_ptr;"
+        putd_backslash "arg##n[i] = FUNCNAME##_fake.out_arg##n##_ptr[i];"
       }
     }
+    putd "}"
   }
   puts
   $MAX_ARGS.times do |i|
