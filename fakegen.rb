@@ -146,7 +146,10 @@ def define_save_out_arg_helper
     indent {
       putd_backslash "if (FUNCNAME##_fake.out_arg##n##_size)"
       indent {
-        putd_backslash "memcpy((void*)arg##n, (void*)FUNCNAME##_fake.out_arg##n##_ptr, FUNCNAME##_fake.out_arg##n##_size);"
+        putd_backslash "for(int i=0; i<FUNCNAME##_fake.out_arg##n##_size; i++)"
+        indent {
+          putd_backslash "arg##n[i] = FUNCNAME##_fake.out_arg##n##_ptr[i];"
+        }
       }
       putd_backslash "else"
       indent {

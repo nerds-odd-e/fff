@@ -271,6 +271,7 @@ TEST_F(FFFTestSuite, can_set_out_param)
     voidfunc2outparam(&outInt, outStr);
 
     ASSERT_EQ(MEANING_OF_LIFE, outInt);
+    ASSERT_EQ(0, strcmp("any String", outStr));
 }
 
 TEST_F(FFFTestSuite, can_set_out_param_with_size)
