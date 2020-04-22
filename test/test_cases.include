@@ -267,7 +267,7 @@ TEST_F(FFFTestSuite, can_set_out_param)
     voidfunc2outparam_fake.out_arg0_ptr = &anInt;
 
     unsigned int outInt = 12306;
-    char * outStr = "any String";
+    char outStr[] = "any String";
     voidfunc2outparam(&outInt, outStr);
 
     ASSERT_EQ(MEANING_OF_LIFE, outInt);
@@ -294,7 +294,7 @@ TEST_F(FFFTestSuite, can_set_out_param_uint8_and_uint32)
     uint32_t anUint32 = MEANING_OF_LIFE;
     voidfunc3outparam_fake.out_arg1_ptr = &anUint32;
 
-    uint8_t outUint8 = 12306;
+    uint8_t outUint8 = 123;
     uint32_t outUint32 = 12307;
     voidfunc3outparam(&outUint8, &outUint32);
 
@@ -308,14 +308,14 @@ TEST_F(FFFTestSuite, can_set_out_param_struct)
     anStruct.x = 101;
     anStruct.y = 202;
     anStruct.anUint32 = 50505;
-    anStruct.anString = "a String";
+    anStruct.anString = (char *)"a String";
     voidfunc4outparam_fake.out_arg0_ptr = &anStruct;
 
     struct MyStruct outStruct;
     outStruct.x = 303;
     outStruct.y = 404;
     outStruct.anUint32 = 60606;
-    outStruct.anString = "yet another String";
+    outStruct.anString = (char *)"yet another String";
     voidfunc4outparam(&outStruct);
 
     ASSERT_EQ(101, outStruct.x);
