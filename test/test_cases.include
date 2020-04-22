@@ -287,43 +287,42 @@ TEST_F(FFFTestSuite, can_set_out_param_with_size)
     ASSERT_EQ(0, strcmp("a String", outStr));
 }
 
-TEST_F(FFFTestSuite, can_set_out_param_uint8)
+TEST_F(FFFTestSuite, can_set_out_param_uint8_and_uint32)
 {
     uint8_t anUint8 = MEANING_OF_LIFE;
     voidfunc3outparam_fake.out_arg0_ptr = &anUint8;
-//    uint32_t anUint32 = MEANING_OF_LIFE;
-//    voidfunc3outparam_fake.out_arg1_ptr = &anUint32;
-//    voidfunc3outparam_fake.out_arg1_size = sizeof(anUint32);
+    uint32_t anUint32 = MEANING_OF_LIFE;
+    voidfunc3outparam_fake.out_arg1_ptr = &anUint32;
 
     uint8_t outUint8 = 12306;
     uint32_t outUint32 = 12307;
     voidfunc3outparam(&outUint8, &outUint32);
 
     ASSERT_EQ(MEANING_OF_LIFE, outUint8);
-//    ASSERT_EQ(MEANING_OF_LIFE, outUint32);
+    ASSERT_EQ(MEANING_OF_LIFE, outUint32);
 }
 
-//TEST_F(FFFTestSuite, can_set_out_param_struct)
-//{
-//    struct MyStruct anStruct;
-//    anStruct.x = 101;
-//    anStruct.y = 202;
-//    anStruct.anUint32 = 50505;
-//    anStruct.anString = "a String";
-//    voidfunc4outparam_fake.out_arg0_ptr = &anStruct;
-//
-//    struct MyStruct outStruct;
-//    outStruct.x = 303;
-//    outStruct.y = 404;
-//    outStruct.anUint32 = 60606;
-//    outStruct.anString = "yet another String";
-//    voidfunc4outparam(&outStruct);
-//
-//    ASSERT_EQ(101, outStruct.x);
-//    ASSERT_EQ(202, outStruct.y);
-//    ASSERT_EQ(50505, outStruct.anUint32);
-//    ASSERT_EQ(0, strcmp("a String", outStruct.anString));
-//}
+TEST_F(FFFTestSuite, can_set_out_param_struct)
+{
+    struct MyStruct anStruct;
+    anStruct.x = 101;
+    anStruct.y = 202;
+    anStruct.anUint32 = 50505;
+    anStruct.anString = "a String";
+    voidfunc4outparam_fake.out_arg0_ptr = &anStruct;
+
+    struct MyStruct outStruct;
+    outStruct.x = 303;
+    outStruct.y = 404;
+    outStruct.anUint32 = 60606;
+    outStruct.anString = "yet another String";
+    voidfunc4outparam(&outStruct);
+
+    ASSERT_EQ(101, outStruct.x);
+    ASSERT_EQ(202, outStruct.y);
+    ASSERT_EQ(50505, outStruct.anUint32);
+    ASSERT_EQ(0, strcmp("a String", outStruct.anString));
+}
 
 TEST_F(FFFTestSuite, return_value_sequence_saved_in_history)
 {

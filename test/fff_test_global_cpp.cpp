@@ -17,6 +17,7 @@ public:
         RESET_FAKE(voidfunc1outparam);
         RESET_FAKE(voidfunc2outparam);
         RESET_FAKE(voidfunc3outparam);
+        RESET_FAKE(voidfunc4outparam);
         RESET_FAKE(voidfunc3var);
         RESET_FAKE(valuefunc3var);
         FFF_RESET_HISTORY();

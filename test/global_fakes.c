@@ -21,7 +21,9 @@ DEFINE_FAKE_VOID_FUNC(voidfunc3outparam, uint8_t *, uint32_t *);
 #undef OUT_ARG_0
 #undef OUT_ARG_1
 
+#define OUT_ARG_0 Y
 DEFINE_FAKE_VOID_FUNC(voidfunc4outparam, struct MyStruct *);
+#undef OUT_ARG_0
 
 DEFINE_FAKE_VALUE_FUNC(long, longfunc0);
 DEFINE_FAKE_VALUE_FUNC(enum MYBOOL, enumfunc0);

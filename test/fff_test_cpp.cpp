@@ -44,7 +44,10 @@ FAKE_VOID_FUNC(voidfunc3outparam, uint8_t *, uint32_t *);
 #undef OUT_ARG_0
 #undef OUT_ARG_1
 
+#define OUT_ARG_0 Y
 FAKE_VOID_FUNC(voidfunc4outparam, struct MyStruct *);
+#undef OUT_ARG_0
+
 FAKE_VALUE_FUNC(long, longfunc0);
 FAKE_VOID_FUNC_VARARG(voidfunc3var, const char *, int, ...);
 FAKE_VALUE_FUNC_VARARG(int, valuefunc3var, const char *, int, ...);
